@@ -473,7 +473,10 @@ def inventoryManager():
     db.session.commit()
     return redirect(url_for('warehouse'))
 
-if __name__ == "__main__":
+def main():
     with app.app_context():
         db.create_all()
     app.run(debug=True, port=8000)
+    
+if __name__ == "__main__":
+    main()
