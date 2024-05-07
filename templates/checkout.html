@@ -1,0 +1,148 @@
+{% extends "baseTemplate.html" %}
+
+{% block title %}
+    Checkout
+{% endblock %}
+{% block content %}
+<style>
+    /* Styles for cart items */
+    #cart-items .list-group-item {
+    border: none;
+    /* margin-bottom: 10px; */
+    background-color: #343a40; /* Dark background color */
+    color: antiquewhite;
+}
+
+#cart-items .list-group-item img {
+    max-width: 100px;
+    margin-right: 20px;
+}
+
+#cart-items .list-group-item h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#cart-items .list-group-item p {
+    margin-bottom: 5px;
+}
+
+#cart-items .list-group-item .price,
+#cart-items .list-group-item .quantity,
+#cart-items .list-group-item .total-price {
+    font-weight: bold;
+}
+
+.payment-details-final {
+    display: flex;
+    flex-direction: column;
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.payment-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.payment-text {
+    color: #fff;
+}
+
+.final-right {
+    color: #fff;
+    text-align: right;
+}
+
+</style>
+    <section class="container py-5">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="mb-4">Cart Summary</h2>
+
+                <ul id="cart-items" class="list-group mb-4">
+                    {% for item in cart %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="{{ item.imgurl }}" alt="{{ item.name }}" class="img-fluid" style="border-radius: 10%;">
+                                </div>
+                                <div class="col-md-8 text-right">
+                                    <h3>{{ item['name'] }}</h3>
+                                    <p>Price: ₹<span class="price">{{ item['price'] }}</span></p>
+                                    <p>Quantity: <span class="quantity">{{ item['quantity'] }}</span></p>
+                                    <p>Total: ₹<span class="total-price">{{ item['price'] * item['quantity'] }}</span></p>
+                                    <hr style="background-color: #fff;">
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                
+                
+                
+            </div>
+            <div class="col-lg-6">
+                <h2 class="mb-4">Payment Details</h2>
+                <div class="payment-details-final">
+                    <div class="payment-detail">
+                        <div class="payment-text">Cart Total:</div>
+                        <div class="final-right">{{ cartPrice }}</div>
+                    </div>
+                    <div class="payment-detail">
+                        <div class="payment-text">GST:</div>
+                        <div class="final-right">{{ cartPrice * 0.18 }}</div>
+                    </div>
+                    <div class="payment-detail">
+                        <div class="payment-text">Total Amount:</div>
+                        <div class="final-right">{{ finalPrice }}</div>
+                    </div>
+                    <div class="payment-detail">
+                        <div class="payment-text">Shipping Price:</div>
+                        <div class="final-right">{{ shippingPrice }}</div>
+                    </div>
+                    <div class="payment-detail">
+                        <div class="payment-text">Final Price:</div>
+                        <div class="final-right">{{ finalPrice + shippingPrice }}</div>
+                    </div>
+                </div>
+                <form id="payment details" method = 'post'>
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label" name="name">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label" name="email">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label" name="address">Address</label>
+                        <input type="text" class="form-control" id="address" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="city" class="form-label" name="city">City</label>
+                        <input type="text" class="form-control" id="city" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="zip" class="form-label" name="zipcode">ZIP Code</label>
+                        <input type="text" class="form-control" id="zip" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="country" class="form-label" name="country">Country</label>
+                        <select class="form-select" id="country" required>
+                            <option value="">Select Country</option>
+                            <option value="IN">India</option>
+                            <option value="NIG">Nigeria</option>
+                            <option value="GER">Germany</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

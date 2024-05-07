@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='global.css')}}">
+
+    <title>{%block title %} Base Template, why r u here {% endblock %}</title>
+</head>
+<script>
+    import { Ripple, initMDB } from "mdb-ui-kit";
+
+    initMDB({ Ripple });
+</script>
+<body>
+<header>
+    <nav style="background-color: black;" class="navbar navbar-expand-sm  navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"> <img src="{{url_for('static', filename='instances/Homepage/Logo1.png')}}" style="width: 100px;"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+                <ul class="navbar-nav" style="font-weight: bold;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('home')}}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('contact')}}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('about')}}">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown">Browse</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('catalogue', category='gpu') }}">Graphics Cards</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('catalogue', category='cpu') }}">CPUs</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('catalogue', category='ram') }}">RAM</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('catalogue', category='motherboard') }}">Motherboards</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('catalogue', category='keyboard') }}">Keyboards</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('catalogue', category='mouse') }}">Mice</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+            {% if isAuthenticated %}
+                <li><a class="navbar-brand" href="{{url_for('dash')}}">
+                        <img src="{{url_for('static', filename='instances/logo.png')}}" alt="Avatar Logo"
+                            style="width:40px;" class="rounded-pill">
+                    </a></li>
+            {% else %}
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('signup')}}">Signup</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+{%block content %}
+{% endblock %}
+
+<footer style="background-color: rgb(28, 28, 28);" class="text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-3 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-2">
+            <!-- Facebook -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/" role="button"><i
+                    class="fab fa-facebook-f"></i></a>
+
+            <!-- Twitter -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/elonmusk" role="button"><i class="fab fa-twitter"></i></a>
+
+            <!-- Google -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.google.com/" role="button"><i class="fab fa-google"></i></a>
+
+            <!-- Instagram -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/mr_phatack/" role="button"><i
+                    class="fab fa-instagram"></i></a>
+
+            <!-- Linkedin -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/raj-mehta-designare-game-designer-developer/" role="button"><i
+                    class="fab fa-linkedin-in"></i></a>
+
+            <!-- Github -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/raj03kumar" role="button"><i class="fab fa-github"></i></a>
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0);">
+        © 2020 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrapon.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+{% extends 'baseTemplate.html' %}
+{% block title %} Contact Us {% endblock %}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='homepageStyles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="{{ url_for('static', filename='contactVal.js') }}"></script>
+    <style>
+        #name {
+            margin-right: 21px;
+        }
+
+        #number {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            height: 150px;
+            width: 95%;
+            resize: none;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            padding: 10px;
+        }
+
+        textarea:hover {
+            border: 1px darkblue solid;
+        }
+
+        .contact {
+            margin-left: 25%;
+            width: 50%;
+            margin-top: 25px;
+        }
+
+        .contact h3 {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .contact .contactPreface {
+            text-align: center;
+        }
+
+        .getInfo {
+            margin-top: 20px;
+        }
+
+        .mailPromo {
+            width: 50%;
+            margin-left: 25%;
+            text-align: center;
+        }
+
+        .mailPromo h4 {
+            margin-top: 10px;
+            font-size: medium;
+        }
+
+        .mailPromo input {
+            margin-top: 10px;
+        }
+
+        #finalInfo {
+            /* Mein bola */
+            margin-top: 20%;
+            text-align: center;
+            font-size: large;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-info" role="alert">
+                {{ msg }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+<div class="contact">
+    <div class="contactPreface">
+        <h1>Contact Us</h1><br>
+        We're here to assist you.
+        Please take a moment to provide your contact details and share any inquiries, comments, or concerns you may
+        have using the form below.
+        Your input is vital to us, and we look forward to connecting with you soon. Thank you for choosing TVS.
+    </div>
+    <div class="getInfo">
+        <form id="contactForm" method="POST" action="{{url_for('contact')}}" onsubmit="return validateForm()">
+            <div class="row mb-3">
+                <div class="col">
+                    <input id="nameInput" type="text" class="form-control bg-dark text-white rounded" name="name"
+                        placeholder="Enter your name">
+                </div>
+                <div class="col">
+                    <input id="phoneInput" type="number" class="form-control bg-dark text-white rounded" name="phoneNum"
+                        placeholder="Phone Number">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <input id="emailInput" type="text" class="form-control bg-dark text-white rounded" name="email"
+                        placeholder="Email Address">
+                </div>
+            </div>
+
+            <textarea id="comment" name="comment" class="form-control bg-dark text-white rounded" rows="10"
+                placeholder="Type something"></textarea><br>
+            <button class="round-black-btn" type="submit">Submit</button>
+        </form>
+
+    </div>
+
+</div>
+<div class="mailPromo">
+    <h4>Join our exclusive mailing list</h4>
+    <p>Be among the first ones to receive latest news about product launches, discounts and offers</p>
+    <div class="row mb-3">
+        <center>
+            <div class="col-md-8">
+                <input type="email" class="form-control bg-dark text-white rounded" name="name"
+                    placeholder="Enter Email Address">
+            </div>
+        </center>
+    </div>
+</div>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+{% endblock %}

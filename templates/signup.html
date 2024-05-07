@@ -1,0 +1,49 @@
+{% extends "baseTemplate.html" %}
+{% block title %} Sign Up {% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='formStyles.css')}}">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-info" role="alert">
+                {{ msg }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+<div id="FormBox">
+    <form method="POST" onsubmit="return validateSignup()">
+        <h1 style="text-align: center;">Sign Up</h1>
+        <br>
+        <label for="new-first-name">First Name:</label>
+        <input id="new-first-name" name="new-first-name" placeholder="Enter Name" type="text"><br><br>
+    
+        <label for="new-last-name">Last Name:</label>
+        <input id="new-last-name" name="new-last-name" placeholder="Enter Name" type="text"><br><br>
+    
+        <label for="new-email">E-mail:</label>
+        <input id="new-email" name="new-email" placeholder="Enter email" type="text"><br><br>
+    
+        <label for="new-phone">Phone:</label>
+        <input id="new-phone" name="new-phone" placeholder="Enter contact number" type="number"><br><br>
+    
+        <label for="new-password">Password:</label>
+        <input id="new-password" name="new-password" placeholder="Enter password" type="password"><br><br>
+    
+        <label for="confirm-password">Confirm Password:</label>
+        <input id="confirm-password" name="confirm-password" placeholder="Enter password" type="password"><br><br>
+    
+        <button type="submit">SignUp</button>
+    </form>
+   </div>
+<p style="text-align: center; padding: 10px;;">
+    Already have an account? <a href="{{url_for('login')}}">Log In</a>
+</p>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'baseTemplate.html' %}
+{% block title %} Arigato :3 {%endblock%}
+{%block content%}
+
+<!-- <h2>Thank You for Choosing Us!</h2><br><br> -->
+<div class="container" style="padding:20px;">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-primary bg-dark text-white">
+                <div class="card-body" >
+                    <h4 class="card-title text-primary">Thank You!</h4>
+                    <p class="card-text" style="margin-bottom: 0;">
+                        Dear {{name}}</span>,
+                        <br><br>
+                        We want to extend our sincerest gratitude for choosing Raijin for your recent purchase. It means
+                        the world to us that you've entrusted us with your business, and we're committed to delivering
+                        the best possible experience to you.
+                        <br><br>
+                        Your support not only fuels our passion for what we do but also allows us to continue providing
+                        top-quality products and services to our valued customers like yourself. 
+                        <br><br>
+                        At Raijin, we're dedicated to exceeding your expectations every step of the way. Should you have
+                        any questions, concerns, or feedback, please don't hesitate to reach out to us. Our team is here
+                        to assist you and ensure your complete satisfaction.
+                        <br><br>
+                        Once again, thank you for your trust and patronage. We look forward to serving you again in the
+                        future.
+                        <br><br>
+                        Warm regards,
+                        <br>
+                        {{founderName}}
+                        <br>
+                        Raijin Co-Founder, <br>TVS LLC.
+                        <hr style="background-color: white; margin-bottom: 0;">
+                    </p>
+                </div>
+                <a href="{{url_for('home')}}" class="btn btn-dark btn-lg" style="margin-top: 0; padding-top: 0;">Back To Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

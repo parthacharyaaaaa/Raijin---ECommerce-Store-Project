@@ -1,0 +1,305 @@
+{% extends "baseTemplate.html" %}
+{%block title %} Buy {{name}} {% endblock %}
+{% block content %}
+
+<head>
+	<style>
+
+		input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+	</style>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+</head>
+<br>
+
+<con style="padding-top: 100px;top: 100px;margin-top: 25px;">
+	<div class="container">
+
+		<!--
+				<div class="heading-section">
+					<h2 style="color: antiquewhite;">Product Details</h2>
+				</div>
+			-->
+		<div class="row">
+			<div class="col-md-6">
+				<div id="slider" class="owl-carousel product-slider">
+					<div class="item">
+						<img src="{{ img1 }}" alt="Image">
+					</div>
+					<div class="item">
+						<img src="{{ img2 }}" />
+					</div>
+					<div class="item">
+						<img src="{{ img3 }}" />
+					</div>
+					<div class="item">
+						<img src="{{ img4 }}" />
+					</div>
+				</div>
+				<div id="thumb" class="owl-carousel product-thumb">
+					<div class="item">
+						<img src="{{ img1 }}" />
+					</div>
+					<div class="item">
+						<img src="{{ img2 }}" />
+					</div>
+					<div class="item">
+						<img src="{{ img3 }}" />
+					</div>
+					<div class="item">
+						<img src="{{ img4 }}" />
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="product-dtl">
+					<div class="product-info">
+						<div class="product-name" style="color: antiquewhite;">{{name}}</div>
+						<div class="reviews-counter">
+							<div class="rate">
+								{% if stars >= 4.8 %}
+								<input type="radio" id="star5" name="rate" value="5" checked disabled
+									style="cursor: default;" />
+								<label for="star5" title="text">5 stars</label>
+								<input type="radio" id="star4" name="rate" value="4" disabled
+									style="cursor: default;" />
+								<input type="radio" id="star4" name="rate" value="4" disabled
+									style="cursor: default;" />
+								<label for="star4" title="text">4 stars</label>
+								<input type="radio" id="star3" name="rate" value="3" disabled
+									style="cursor: default;" />
+								<label for="star3" title="text">3 stars</label>
+								<input type="radio" id="star2" name="rate" value="2" disabled
+									style="cursor: default;" />
+								<label for="star2" title="text">2 stars</label>
+								<input type="radio" id="star1" name="rate" value="1" disabled
+									style="cursor: default;" />
+								<label for="star1" title="text">1 star</label>
+
+								{% elif stars >= 3.8 %}
+								<input type="radio" id="star5" name="rate" value="5" checked disabled
+									style="cursor: default;" />
+								<label for="star5" title="text">5 stars</label>
+								<input type="radio" id="star4" name="rate" value="4" checked disabled
+									style="cursor: default;" />
+								<input type="radio" id="star4" name="rate" value="4" disabled
+									style="cursor: default;" />
+								<label for="star4" title="text">4 stars</label>
+								<input type="radio" id="star3" name="rate" value="3" disabled
+									style="cursor: default;" />
+								<label for="star3" title="text">3 stars</label>
+								<input type="radio" id="star2" name="rate" value="2" disabled
+									style="cursor: default;" />
+								<label for="star2" title="text">2 stars</label>
+								<input type="radio" id="star1" name="rate" value="1" disabled
+									style="cursor: default;" />
+								<label for="star1" title="text">1 star</label>
+
+								{% elif stars >= 2.8 %}
+								<input type="radio" id="star5" name="rate" value="5" checked disabled
+									style="cursor: default;" />
+								<label for="star5" title="text">5 stars</label>
+								<input type="radio" id="star4" name="rate" value="4" checked disabled
+									style="cursor: default;" />
+								<input type="radio" id="star4" name="rate" value="4" checked disabled
+									style="cursor: default;" />
+								<label for="star4" title="text">4 stars</label>
+								<input type="radio" id="star3" name="rate" value="3" checked disabled
+									style="cursor: default;" />
+								<label for="star3" title="text">3 stars</label>
+								<input type="radio" id="star2" name="rate" value="2" disabled
+									style="cursor: default;" />
+								<label for="star2" title="text">2 stars</label>
+								<input type="radio" id="star1" name="rate" value="1" disabled
+									style="cursor: default;" />
+								<label for="star1" title="text">1 star</label>
+
+								{% elif stars >= 1.8 %}
+								<input type="radio" id="star5" name="rate" value="5" checked disabled
+									style="cursor: default;" />
+								<label for="star5" title="text">5 stars</label>
+								<input type="radio" id="star4" name="rate" value="4" checked disabled
+									style="cursor: default;" />
+								<input type="radio" id="star4" name="rate" value="4" checked disabled
+									style="cursor: default;" />
+								<label for="star4" title="text">4 stars</label>
+								<input type="radio" id="star3" name="rate" value="3" checked disabled
+									style="cursor: default;" />
+								<label for="star3" title="text">3 stars</label>
+								<input type="radio" id="star2" name="rate" value="2" checked disabled
+									style="cursor: default;" />
+								<label for="star2" title="text">2 stars</label>
+								<input type="radio" id="star1" name="rate" value="1" disabled
+									style="cursor: default;" />
+								<label for="star1" title="text">1 star</label>
+
+								{% elif stars >= 0.8 %}
+								<input type="radio" id="star5" name="rate" value="5" checked disabled
+									style="cursor: default;" />
+								<label for="star5" title="text">5 stars</label>
+								<input type="radio" id="star4" name="rate" value="4" checked disabled
+									style="cursor: default;" />
+								<input type="radio" id="star4" name="rate" value="4" checked disabled
+									style="cursor: default;" />
+								<label for="star4" title="text">4 stars</label>
+								<input type="radio" id="star3" name="rate" value="3" checked disabled
+									style="cursor: default;" />
+								<label for="star3" title="text">3 stars</label>
+								<input type="radio" id="star2" name="rate" value="2" checked disabled
+									style="cursor: default;" />
+								<label for="star2" title="text">2 stars</label>
+								<input type="radio" id="star1" name="rate" value="1" disabled
+									style="cursor: default;" />
+								<label for="star1" title="text">1 star</label>
+								{% endif %}
+
+							</div>
+
+							<span style="color: antiquewhite;">{{reviews}} Reviews</span><br>
+							<span style="color: antiquewhite;">{{stars}} Stars</span>
+						</div>
+						{% if stock == 0 %}
+						<div class="prodList-price-discount"><span style="margin:0; color:red;">{{stock}} units in
+								stock</span></div>
+						{% else %}
+						<div class="prodList-price-discount"><span style="margin:0; color:antiquewhite;">{{stock}} units
+								in stock</span></div>
+						{% endif %}
+						<div class="product-price-discount"><span style="color: antiquewhite;">₹{{price}}.00</span><span
+								class="line-through">₹{{price+100}}.00</span></div>
+					</div>
+					<p style="color: antiquewhite">{{ specs|replace('\\n', '<br>')|safe }}</p>
+					<div class="product-count">
+						<label for="size" style="color: antiquewhite;">Quantity</label>
+						<div class="display-flex">
+							<div class="qtyminus">-</div>
+							<input type="number" name="quantity" id="quantity" value="1" class="qty" max="{{stock}}" min="1" oninput="checkOrderQuantity()">
+							<div class="qtyplus" id="increment" onclick="incrementOrderValue()">+</div>
+						</div>
+						
+						<script>
+							function incrementOrderValue(){
+								document.getElementById('quantity').value++;
+								checkOrderQuantity();
+							}
+							function checkOrderQuantity() {
+								var quantityInput = document.getElementById('quantity');
+								var quantity = parseInt(quantityInput.value);
+								var stock = parseInt(quantityInput.getAttribute('max'));
+						
+								if(quantity > stock) {
+									alert('Cannot place an order for items above the current stock');
+									quantityInput.value = 0;
+								}
+							}
+						</script>
+						{% if stock == 0 %}
+						<button disabled class="round-black-btn">Add to Cart</button>
+						{% else %}
+						<button onclick="addToCart({{ productID }})" class="round-black-btn">Add to Cart</button>
+						{% endif %}
+						<script>
+							function addToCart(productID) {
+								if ("{{ isAuthenticated}}" == "False") {
+									alert("You must have an account to have a cart")
+									return False
+								}
+								var quantity = document.getElementById('quantity').value;
+								var formData = new FormData();
+								formData.append('product_id', productID);
+								formData.append('quantity', quantity);
+
+								console.log("Caught request for: ", productID);
+
+								var xhr = new XMLHttpRequest();
+								xhr.open('POST', '/addToCart', true);
+								xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+								xhr.onreadystatechange = function () {
+									if (xhr.readyState === XMLHttpRequest.DONE) {
+										if (xhr.status === 200) {
+											document.getElementById('cart-message').textContent = 'Product added to cart!';
+										} else {
+											document.getElementById('cart-message').textContent = 'Failed to add product to cart.';
+										}
+									}
+								};
+
+								xhr.send(formData);
+							}
+						</script>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="product-info-tabs">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+						aria-controls="description" aria-selected="true" style="color:grey;">Description</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
+						aria-controls="review" aria-selected="false" style="color: grey;">Reviews ({{reviews - 1}})</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="description" role="tabpanel"
+					aria-labelledby="description-tab" style="color: antiquewhite;">
+					{{description}}
+				</div>
+				<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+					<div class="review-heading" style="color: antiquewhite;">REVIEWS</div>
+					{% if reviews - 1 == 0 %}
+					<p class="mb-20" style="color: antiquewhite;">There are no reviews yet.</p>
+					{% else %}
+					{% for items in reviewList %}
+					<div class="review" style="background-color: grey; color:antiquewhite">
+						<p class="name">{{ items.name }}</p>
+						<p class="rating">Rating: {{ items.rating }}</p>
+						<p class="reviewBody">{{ items.reviewBody }}</p>
+					</div>
+
+					{% endfor %}
+					{% endif %}
+					<div style="width: 100%;background-color: antiquewhite;height: 4px;top: 0%;left: 0%;"></div>
+					<form class="review-form" id="review-form" name="review-form" method="POST">
+						<div class="form-group">
+							<div class="row mb-3">
+								<div class="col-md-3">
+									<label style="color: antiquewhite;">Your Rating</label>
+									<input name="rater" id="rater" class="form-control bg-dark text-white rounded"
+										type="number" min="1" max="5">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label style="color: antiquewhite;">Your message</label>
+							<textarea class="form-control" rows="10" name="review-review"></textarea>
+						</div>
+						<button class="round-black-btn" style="color: antiquewhite;" type="submit">Submit
+							Review</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div style="text-align:center;font-size:14px;padding-bottom:2px;"><a target="_blank"
+				style="color:#ff5e63;font-weight:bold;"></a></div>
+	</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<!-- partial -->
+	<script src="{{ url_for('static', filename='script.js') }}"></script>
+</con>
+{% endblock %}

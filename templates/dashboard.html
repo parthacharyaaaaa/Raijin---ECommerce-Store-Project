@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='global.css')}}">
+
+    <title>{%block title %} Dashboard {% endblock %}</title>
+
+    <style>
+    /* User info section */
+    .user-info {
+        background-color: #222;
+        color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .user-info h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    .user-info p {
+        margin-bottom: 10px;
+    }
+
+    .user-info button {
+        background-color: #444;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .cart{
+        background-color: #575757;
+        color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+    }
+    .user-info button:hover {
+        background-color: #666;
+    }
+        /* Container for cart items */
+        #cart-items {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+    
+        /* Individual cart item */
+        #cart-items li {
+            border: 1px solid #222;
+            margin-bottom: 10px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #333;
+        }
+    
+        /* Cart item name */
+        #cart-items li h3 {
+            margin: 0;
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    
+        /* Cart item price */
+        #cart-items li .price {
+            font-size: 16px;
+            color: #bbb;
+        }
+    
+        /* Cart item quantity */
+        #cart-items li .quantity {
+            font-size: 16px;
+            color: #bbb;
+        }
+    
+        /* Cart item total price */
+        #cart-items li .total-price {
+            font-size: 16px;
+            color: #fff;
+            font-weight: bold;
+        }
+    
+        /* Remove button */
+        #cart-items li .remove-form {
+            display: inline-block;
+
+        }
+
+        #cart-items li .remove-form {
+            display: inline-block;
+        }
+    
+        /* Increase and decrease buttons */
+        #cart-items li .decrement-btn,
+        #cart-items li .increment-btn,
+        #cart-items li .remove-btn {
+            margin-top: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        /* Hover effect for increase and decrease buttons */
+        #cart-items li .decrement-btn:hover,
+        #cart-items li .increment-btn:hover {
+            background-color: darkblue;
+        }
+
+        #cart-items li .remove-btn:hover{
+            background-color: maroon;
+        }
+
+        .checkout-btn{
+            margin-top: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<script>
+    import { Ripple, initMDB } from "mdb-ui-kit";
+
+    initMDB({ Ripple });
+</script>
+
+<body>
+    <header>
+        <nav style="background-color: black;" class="navbar navbar-expand-sm  navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"> <img src="{{url_for('static', filename='instances/Homepage/Logo1.png')}}" style="width: 100px;"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url_for('home')}}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown">Browse</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('catalogue', category='gpu') }}">Graphics
+                                        Cards</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('catalogue', category='cpu') }}">CPUs</a>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ url_for('catalogue', category='ram') }}">RAM</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('catalogue', category='motherboard') }}">Motherboards</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('catalogue', category='keyboard') }}">Keyboards</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ url_for('catalogue', category='mouse') }}">Mice</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if isAuthenticated %}
+                    <li><a class="navbar-brand" href="{{url_for('dash')}}">
+                            <img src="{{url_for('static', filename='instances/logo.png')}}" alt="Avatar Logo"
+                                style="width:40px;" class="rounded-pill">
+                        </a></li>
+                    {% else %}
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url_for('signup')}}">Signup</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="user-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for msg in messages %}
+                    <div class="alert alert-info" role="alert">
+                        {{ msg }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+            <hr>
+        </div>
+        <h2>User Info</h2>
+        <!-- <p>User info goes here</p> -->
+        <p>Username: {{ username }}</p>
+        <h5>Contact Details</h5>
+        <p>Email address: {{ email }}</p>
+        <p>Phone Number: {{ num }}</p>
+        <!-- Password: {{ password }} -->
+        <button>
+            <a href="{{ url_for('adm') }}" style="color: #fff; text-decoration: none;">Log Out</a>
+        </button>
+    </div>
+    
+    <div class="cart">
+        <h1>Shopping Cart</h1>
+        <h4>The products you add will be shown here</h4>
+    </div>
+    <ul id="cart-items">
+        {% for items in cart_items %}
+        <li>
+            <h3>{{ items['name'] }}</h3>
+            <p>Price: ₹<span class="price" id="{{ items['id'] }}-price">{{ items['price'] }}</span></p>
+            <p>Quantity: <span class="quantity" id="{{ items['id'] }}">{{ items['quantity'] }}</span></p>
+            <p>Total: ₹<span class="total-price" id="{{ items['id'] }}-totalPrice"> {{ items['price'] *  items['quantity'] }} </span></p>
+            <form class="remove-form" data-product-id="{{ items['id'] }}">
+                <button type="button" class="remove-btn">Remove</button>
+            </form>
+            <button type="button" class="decrement-btn" data-product-id="{{ items['id'] }}">Decrease Quantity</button>
+            <button type="button" class="increment-btn" data-product-id="{{ items['id'] }}">Increase Quantity</button>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{url_for('checkout')}}">
+        <button class = "checkout-btn">Proceed to checkout</button>
+    </a>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to send AJAX request to remove item from cart
+            $(".remove-btn").click(function () {
+                var button = $(this); // Store reference to the button
+                var productId = button.closest('.remove-form').data('product-id');
+                $.ajax({
+                    url: "/removeFromCart/" + productId,
+                    type: "POST",
+                    success: function (response) {
+                        // Handle success response - remove the item from the cart section
+                        button.closest('li').remove(); // Use 'button' here instead of 'this'
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response
+                        console.log(error);
+                    }
+                });
+            });
+
+            $(".decrement-btn").click(function () {
+                console.log("Decrement triggered")
+                var button = $(this); // Store reference to the button
+                var productId = button.data('product-id');
+                console.log(productId)
+                $.ajax({
+                    url: "/decrementCartItem/" + productId,
+                    type: "POST",
+                    success: (response) => {
+                        // Handle success response - increment quantity and update displayed quantity
+                        var quantityElement = button.siblings('.quantity'); // Use 'button' here instead of 'this'
+                        var pp = document.getElementById(productId)
+                        var poopoo = document.getElementById(productId + "-totalPrice")
+                        var productPrice = document.getElementById(productId + "-price")
+
+
+                        var newQuantity = parseInt(pp.textContent) - 1;
+                        console.log(newQuantity)
+                        if (newQuantity <= 0) {
+                            button.closest('li').remove()
+                        }
+                        pp.textContent = newQuantity;
+                        var newTotal = newQuantity * parseFloat(productPrice.textContent);
+                        console.log(newTotal);
+                        poopoo.textContent = newTotal;
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response
+                        console.log(error);
+                    }
+                });
+            });
+
+            // Function to send AJAX request to increase quantity
+            $(".increment-btn").click(function () {
+                console.log("Increment triggered")
+                var button = $(this); // Store reference to the button
+                var productId = button.data('product-id');
+                console.log(productId)
+                $.ajax({
+                    url: "/incrementCartItem/" + productId,
+                    type: "POST",
+                    success: (response) => {
+                        // Handle success response - increment quantity and update displayed quantity
+                        var quantityElement = button.siblings('.quantity'); // Use 'button' here instead of 'this'
+                        var pp = document.getElementById(productId)
+                        var poopoo = document.getElementById(productId + "-totalPrice")
+                        var productPrice = document.getElementById(productId + "-price")
+
+                        var newQuantity = parseInt(pp.textContent) + 1;
+                        console.log(newQuantity)
+
+                        pp.textContent = newQuantity;
+                        var newTotal = newQuantity * parseFloat(productPrice.textContent);
+                        console.log(newTotal);
+                        poopoo.textContent = newTotal;
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response
+                        console.log(error);
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

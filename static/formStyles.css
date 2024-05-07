@@ -1,0 +1,36 @@
+#FormBox {
+    border-style: solid;
+    position: relative;
+    margin: 50px auto; /* Adjust margin to center vertically */
+    padding: 20px; /* Reduce padding to maximize space */
+    width: 80%; /* Set width to 80% of the viewport */
+    max-width: 30%; /* Set a maximum width */
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+input {
+    width: 100%;
+    margin-bottom: 15px; /* Add spacing between input fields */
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: grey;
+}

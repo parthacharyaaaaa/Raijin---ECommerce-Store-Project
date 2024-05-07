@@ -1,0 +1,545 @@
+{% extends 'baseTemplate.html' %}
+{% block title %} View {% endblock %}
+{%block content %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='homepageStyles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <!------ Include the above in your HEAD tag ---------->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        .filter-container {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            height: min-content;
+        }
+
+        h2 {
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        input[type="checkbox"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #666;
+            background-color: #444;
+            color: white;
+            margin-top: 5px;
+            /* Disable spin buttons */
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"]:focus,
+        input[type="checkbox"]:focus {
+            outline: none;
+            border-color: #00f;
+        }
+
+        button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005;
+        }
+    </style>
+</head>
+<script>
+    import { Ripple, initMDB } from "mdb-ui-kit";
+    initMDB({ Ripple });    
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<body>
+    <div style="width: 100%;background-color: white;height: 4px;top: 0%;left: 0%;"></div>
+
+    <video id="myVideo" style="width: 100%;top: 0%;left: 0%;background-color: black;" autoplay loop>
+        {% if category == 'keyboard' %}
+        <source src="{{ url_for('static', filename='instances/Homepage/Keyboard video.mp4') }}">
+        {% elif category == 'gpu' %}
+        <source src="{{ url_for('static', filename='instances/Homepage/gpu1.mp4') }}">
+        {% elif category == 'cpu' %}
+        <source src="{{ url_for('static', filename='instances/Homepage/cpu.mp4') }}">
+        {% elif category == 'ram' %}
+        <source src="{{ url_for('static', filename='instances/Homepage/Ram-edit.mp4') }}">
+        {% elif category == 'motherboard' %}
+        <source src="{{ url_for('static', filename='instances/Homepage/mb-edit - Made with Clipchamp.mp4') }}">
+        {% elif category == 'mouse' %}
+        <source src="{{ url_for('static', filename='instances/Homepage/MOUSEvideo.mp4') }}">
+
+        {% endif %}
+    </video>
+
+    <div style="width: 100%;background-color: white;height: 4px;top: 0%;left: 0%;padding-top: 0%;margin-top: 0%;"></div>
+
+    <h1 class="center" style="color: white;justify-content: center;text-align: center;padding-top: 20px;">
+        <strong>OUR HERO PRODUCTS</strong>
+    </h1>
+    <div class="flex-container">
+        {% for items in pakkaList %}
+        <div class="container">
+            <section class="mx-auto my-5" style="max-width: 23rem;">
+
+                <div class="card">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        {% if items.availableUnits == 0 %}
+                        <div style="position: relative; display: inline-block;">
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; background-color: rgba(255, 255, 255, 0.8); padding: 10px;">Out of Stock</div>
+                            <img src="{{ url_for('static', filename=items.img1) }}" class="img-fluid" style="filter: grayscale(100);" />
+                        </div>
+                        
+                        {% else %}
+                        <img src="{{ url_for('static', filename=items.img1) }}" class="img-fluid" />
+                        {% endif %}
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold"><a>{{items.name}}</a></h5>
+                        <ul class="list-unstyled list-inline mb-0">
+                            <a href="" class="btn btn-outline-dark btn-sm active">Gaming</a>
+                            <li class="list-inline-item">
+                                <a href="" class="btn btn-outline-dark btn-sm active">{{items.rating}} ⭐</a>
+                            </li>
+                        </ul>
+
+                        <div class="card-text" style="padding-top:5px;">{{items.summary}}<br>
+                            <b style="padding-top: 1px;">INR {{items.price}}</b>
+                        </div>
+                        <div style="padding-top:5px;">
+                            <a href="{{url_for('individualProduct', product_id = items.id)}}">
+                                <button class="btn btn-outline-dark btn-sm">View</button>
+                            </a>
+                            {% if items.availableUnits == 0 %}
+                            <button disabled
+                                class="btn btn-outline-dark btn-sm">Add To Cart</button>
+                            {% else %}
+                                <button onclick="addToCart({{ items.id }})"
+                                    class="btn btn-outline-danger btn-sm">Add To Cart</button>
+                                {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div style="width: 100%;background-color: white;height: 4px;top: 0%;left: 0%;margin-top: 0%;padding-top: 0%;"></div>
+
+    <div class="container.fluid" style="border: 0px solid white;width: 100%;height:513px;">
+        {% if category == 'cpu' %}
+        <div class="container.fluid" style="position: relative; width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/22.png')}}" data-aos="slide-right"
+                data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/23.png')}}" data-aos="fade-in"
+                data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/cpu 1.png')}}" data-aos="slide-right"
+                data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+            <!-- <img src="Isagiqoutes.png" data-aos="fade-in" data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;">-->
+            <img src="{{ url_for('static', filename='instances/Homepage/25.png')}}" data-aos="slide-left"
+                data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/26.png')}}" data-aos="slide-left"
+                data-aos-delay="1500" data-aos-duration="1000" style="position: absolute;width: 100%;">
+        </div>
+        {% elif category == 'gpu' %}
+        <div class="container.fluid" style="position: relative; width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/22.png')}}" data-aos="slide-right"
+                data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/23.png')}}" data-aos="fade-in"
+                data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/gpu1.png')}}" data-aos="slide-right"
+                data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+            <!-- <img src="Isagiqoutes.png" data-aos="fade-in" data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;">-->
+            <img src="{{ url_for('static', filename='instances/Homepage/25.png')}}" data-aos="slide-left"
+                data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/26.png')}}" data-aos="slide-left"
+                data-aos-delay="1500" data-aos-duration="1000" style="position: absolute;width: 100%;">
+        </div>
+        {% elif category == 'ram' %}
+        <div class="container.fluid" style="position: relative; width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/22.png')}}" data-aos="slide-right"
+                data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/23.png')}}" data-aos="fade-in"
+                data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/ram1.png')}}" data-aos="slide-right"
+                data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+            <!-- <img src="Isagiqoutes.png" data-aos="fade-in" data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;">-->
+            <img src="{{ url_for('static', filename='instances/Homepage/25.png')}}" data-aos="slide-left"
+                data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/26.png')}}" data-aos="slide-left"
+                data-aos-delay="1500" data-aos-duration="1000" style="position: absolute;width: 100%;">
+        </div>
+        {% elif category == 'keyboard' %}
+        <div class="container.fluid" style="position: relative; width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/22.png')}}" data-aos="slide-right"
+                data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/23.png')}}" data-aos="fade-in"
+                data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/keyboard1.png')}}" data-aos="slide-right"
+                data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+            <!-- <img src="Isagiqoutes.png" data-aos="fade-in" data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;">-->
+            <img src="{{ url_for('static', filename='instances/Homepage/25.png')}}" data-aos="slide-left"
+                data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/26.png')}}" data-aos="slide-left"
+                data-aos-delay="1500" data-aos-duration="1000" style="position: absolute;width: 100%;">
+        </div>
+        {% elif category == 'mouse' %}
+        <div class="container.fluid" style="position: relative; width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/22.png')}}" data-aos="slide-right"
+                data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/23.png')}}" data-aos="fade-in"
+                data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/mouse1.png')}}" data-aos="slide-right"
+                data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+            <!-- <img src="Isagiqoutes.png" data-aos="fade-in" data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;">-->
+            <img src="{{ url_for('static', filename='instances/Homepage/25.png')}}" data-aos="slide-left"
+                data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/26.png')}}" data-aos="slide-left"
+                data-aos-delay="1500" data-aos-duration="1000" style="position: absolute;width: 100%;">
+        </div>
+        {% elif category == 'motherboard' %}
+        <div class="container.fluid" style="position: relative; width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/22.png')}}" data-aos="slide-right"
+                data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/23.png')}}" data-aos="fade-in"
+                data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/mother1.png')}}" data-aos="slide-right"
+                data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+            <!-- <img src="Isagiqoutes.png" data-aos="fade-in" data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;">-->
+            <img src="{{ url_for('static', filename='instances/Homepage/25.png')}}" data-aos="slide-left"
+                data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+            <img src="{{ url_for('static', filename='instances/Homepage/26.png')}}" data-aos="slide-left"
+                data-aos-delay="1500" data-aos-duration="1000" style="position: absolute;width: 100%;">
+        </div>
+        {% endif %}
+    </div>
+
+    <div style="width: 100%;background-color: white;height: 4px;top: 0%;left: 0%;"></div>
+
+    <div style="background-color: black;">
+
+        <script>
+            function singleSelectCheckbox(checkbox) {
+                var checkboxes = document.getElementsByName(checkbox.name);
+                checkboxes.forEach(function (currentCheckbox) {
+                    if (currentCheckbox !== checkbox) {
+                        currentCheckbox.checked = false;
+                    }
+                });
+            }
+        </script>
+        <bgdiv style="background-color: black;">
+            <div class="flex-container">
+                <div class="filter-container">
+                    <h2>Filters</h2>
+                    <form id="filterSortForm" method="post">
+                        <div class="form-group">
+                            <label for="priceRange">Price Range:</label><br>
+                            <input type="number" name="minPrice" placeholder="Min Price"><br>
+                            <input type="number" name="maxPrice" placeholder="Max Price">
+                            <span id="priceOutput"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating">Rating:</label><br>
+                            <input type="checkbox" name="rating" value="5" onclick="singleSelectCheckbox(this)"> 5
+                            stars<br>
+                            <input type="checkbox" name="rating" value="4" onclick="singleSelectCheckbox(this)"> 4 stars
+                            and up<br>
+                            <input type="checkbox" name="rating" value="3" onclick="singleSelectCheckbox(this)"> 3 stars
+                            and up<br>
+                            <input type="checkbox" name="rating" value="2" onclick="singleSelectCheckbox(this)"> 2 stars
+                            and up<br>
+                            <input type="checkbox" name="rating" value="1" onclick="singleSelectCheckbox(this)"> 1 star
+                            and up
+                        </div>
+                        <h2>Sort By:</h2>
+                        <div class="form-group">
+                            <label for="sortOption">Sorting Options:</label><br>
+                            <input type="checkbox" name="sort-option" value="5" onclick="singleSelectCheckbox(this)">
+                            Relevance<br>
+                            <input type="checkbox" name="sort-option" value="4" onclick="singleSelectCheckbox(this)">
+                            Price (Low to High)<br>
+                            <input type="checkbox" name="sort-option" value="3" onclick="singleSelectCheckbox(this)">
+                            Price (High to Low)<br>
+                            <input type="checkbox" name="sort-option" value="2" onclick="singleSelectCheckbox(this)">
+                            Best Rated<br>
+                            <input type="checkbox" name="sort-option" value="1" onclick="singleSelectCheckbox(this)">
+                            A-Z <br>
+                            <input type="checkbox" name="exclude out-of-stock"> Exclude Out Of Stock
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Apply Filter</button>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <div>
+                        <div class="flex-container1" style="padding-left:60px ;">
+                            {% for items in prodList %}
+                            <div class="container">
+                                <section class="mx-auto my-5" style="max-width: 22rem;">
+
+                                    <div class="card">
+                                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                            {% if items.availableUnits == 0 %}
+                                            <div style="position: relative; display: inline-block;">
+                                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; background-color: rgba(255, 255, 255, 0.8); padding: 10px;">Out of Stock</div>
+                                                <img src="{{ url_for('static', filename=items.img1) }}" class="img-fluid" style="filter: grayscale(100);" />
+                                            </div>
+                                            
+                                            {% else %}
+                                            <img src="{{ url_for('static', filename=items.img1) }}" class="img-fluid" />
+                                            {% endif %}
+
+                                            <a href="#!">
+                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title font-weight-bold"><a>{{items.name}}</a></h5>
+                                            <ul class="list-unstyled list-inline mb-0">
+                                                <a href="" class="btn btn-outline-dark btn-sm active">Gaming</a>
+                                                <li class="list-inline-item">
+                                                    <a href="" class="btn btn-outline-dark btn-sm active">{{ '%.2f' %
+                                                        items.rating}}⭐</a>
+                                                </li>
+                                            </ul>
+
+                                            <div class="card-text" style="padding-top:5px;">{{items.summary}}<br>
+                                                <b style="padding-top: 1px;">INR {{items.price}}</b>
+                                            </div>
+                                            <div style="padding-top:5px;">
+                                                <a href="{{url_for('individualProduct', product_id = items.id)}}">
+                                                    <button class="btn btn-outline-dark btn-sm">View</button>
+                                                </a>
+                                                
+                                            {% if items.availableUnits == 0 %}
+                                            <button disabled
+                                                class="btn btn-outline-dark btn-sm">Add To Cart</button>
+                                            {% else %}
+                                                <button onclick="addToCart({{ items.id }})"
+                                                    class="btn btn-outline-danger btn-sm">Add To Cart</button>
+                                                {% endif %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </section>
+                            </div>
+                            {% endfor %}
+                            <script>
+                                function addToCart(productID) {
+                                    if ("{{ isAuthenticated}}" == "False") {
+                                        alert("You must have an account to have a cart")
+                                        return False
+                                    }
+                                    var quantity = 1;
+                                    var formData = new FormData();
+                                    formData.append('product_id', productID);
+                                    formData.append('quantity', quantity);
+
+                                    console.log("Caught request for: ", productID);
+
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.open('POST', '/addToCart', true);
+                                    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                                            if (xhr.status === 200) {
+                                                document.getElementById('cart-message').textContent = 'Product added to cart!';
+                                            } else {
+                                                document.getElementById('cart-message').textContent = 'Failed to add product to cart.';
+                                            }
+                                        }
+                                    };
+                                    xhr.send(formData);
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </bgdiv>
+    </div>
+    <div style="width: 100%;background-color: white;height: 4px;"></div>
+
+    <div style="width: 100%;background-color: white;height: 4px;top: 0%;left: 0%;"></div>
+    <div style="width: 100%;">
+
+        <div class="container.fluid" style="border: 0px solid white;width: 100%;height:513px;">
+            <div class="container.fluid" style="position: relative; width: 100%;">
+                {% if category == 'keyboard' %}
+                <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                    style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/28.png')}}" data-aos="slide-left"
+                    data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/27.png')}}" data-aos="slide-left"
+                    data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/sukukey.png')}}" data-aos="fade-in"
+                    data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/30.png')}}" data-aos="fade-in"
+                    data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/31.png')}}" data-aos="slide-right"
+                    data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+
+                {% elif category == 'mouse' %}
+                <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                    style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/28.png')}}" data-aos="slide-left"
+                    data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/27.png')}}" data-aos="slide-left"
+                    data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/mouse2.png')}}" data-aos="fade-in"
+                    data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/30.png')}}" data-aos="fade-in"
+                    data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/31.png')}}" data-aos="slide-right"
+                    data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+
+                {% elif category == 'gpu' %}
+                <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                    style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/28.png')}}" data-aos="slide-left"
+                    data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/27.png')}}" data-aos="slide-left"
+                    data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/gpu2.png')}}" data-aos="fade-in"
+                    data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/30.png')}}" data-aos="fade-in"
+                    data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/31.png')}}" data-aos="slide-right"
+                    data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                {% elif category == 'motherboard' %}
+                <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                    style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/28.png')}}" data-aos="slide-left"
+                    data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/27.png')}}" data-aos="slide-left"
+                    data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/mother2.png')}}" data-aos="fade-in"
+                    data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/30.png')}}" data-aos="fade-in"
+                    data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/31.png')}}" data-aos="slide-right"
+                    data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+
+                {% elif category == 'cpu' %}
+                <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                    style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/28.png')}}" data-aos="slide-left"
+                    data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/27.png')}}" data-aos="slide-left"
+                    data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/cpu2.png')}}" data-aos="fade-in"
+                    data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/30.png')}}" data-aos="fade-in"
+                    data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                <img src="{{ url_for('static', filename='instances/Homepage/31.png')}}" data-aos="slide-right"
+                    data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+
+                    {% elif category == 'ram' %}
+                    <img src="{{ url_for('static', filename='instances/Homepage/A_bg.png')}}" data-aos="fade-in"
+                        style="position: absolute;width: 100%;">
+                    <img src="{{ url_for('static', filename='instances/Homepage/28.png')}}" data-aos="slide-left"
+                        data-aos-delay="1000" data-aos-duration="400" style="position: absolute;width: 100%;">
+                    <img src="{{ url_for('static', filename='instances/Homepage/27.png')}}" data-aos="slide-left"
+                        data-aos-delay="1100" data-aos-duration="800" style="position: absolute;width: 100%;">
+                    <img src="{{ url_for('static', filename='instances/Homepage/ram2.png')}}" data-aos="fade-in"
+                        data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                    <img src="{{ url_for('static', filename='instances/Homepage/30.png')}}" data-aos="fade-in"
+                        data-aos-delay="1900" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                    <img src="{{ url_for('static', filename='instances/Homepage/31.png')}}" data-aos="slide-right"
+                        data-aos-delay="1000" data-aos-duration="1000" style="position: absolute;width: 100%;">
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+    <div style="width: 100%;background-color: white;height: 4px;top: 0%;left: 0%;"></div>
+
+    <script>
+        var video = document.getElementById("myVideo");
+
+        // Set up the Intersection Observer
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                // If the video enters the viewport, unmute it; otherwise, mute it
+                if (entry.isIntersecting) {
+                    video.muted = false;
+                } else {
+                    video.muted = true;
+                }
+            });
+        }, { threshold: 0.5 }); // The threshold determines how much of the target element should be visible
+
+        // Observe the video element
+        observer.observe(video);
+
+    </script>
+    <script>
+        AOS.init();
+    </script>
+    {%endblock%}
