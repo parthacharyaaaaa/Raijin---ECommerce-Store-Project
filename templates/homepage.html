@@ -52,7 +52,6 @@
 
     <div style="width: 100%;background-color: white;height: 4px;top: 0%;left: 0%;padding-top: 0%;margin-top: 0%;"></div>
 
-    <!--  Cards to be added by parth -->
     <h1 class="center" style="color: white;justify-content: center;text-align: center;padding-top: 25px;">
         <strong>OUR HERO PRODUCTS </strong>
     </h1>
@@ -236,33 +235,27 @@
 
 
     <div class="flex-container2" style="background-color: #000;height: 725px;">
-
         <img src="{{ url_for('static', filename='instances/Homepage/hmda1.png') }}"
             style="scale: 1.3;top: 0%;margin-bottom:125px ;">
-
-
-
-
-
         <div style="background-color: #000;border: 1px solid black;height: 725px;">
             <divimg style="background-color: #000;">
                 <div class="containerimg" style="background-color: #000;scale: 1.2;margin-top:100px;margin-left:200px">
-                    <div class="box box-1" style="background-image: url(static/instances/Homepage/1.png);"
+                    <div class="box box-1" id="gpu-box" style="background-image: url(static/instances/Homepage/1.png);"
                         data-text="Graphics Card">
                     </div>
-                    <div class="box box-2" style="background-image: url(static/instances/Homepage/2.png);"
+                    <div class="box box-2" id="cpu-box" style="background-image: url(static/instances/Homepage/2.png);"
                         data-text="CPU">
                     </div>
-                    <div class="box box-3" style="background-image: url(static/instances/Homepage/3.png);"
+                    <div class="box box-3" id="motherboard-box" style="background-image: url(static/instances/Homepage/3.png);"
                         data-text="MOTHERBOARD">
                     </div>
-                    <div class="box box-4" style="background-image: url(static/instances/Homepage/4.png);"
+                    <div class="box box-4" id="keyboard-box" style="background-image: url(static/instances/Homepage/4.png);"
                         data-text="KEYBOARD">
                     </div>
-                    <div class="box box-5" style="background-image: url(static/instances/Homepage/5.png);"
+                    <div class="box box-5" id="ram-box" style="background-image: url(static/instances/Homepage/5.png);"
                         data-text="RAM">
                     </div>
-                    <div class="box box-6" style="background-image: url(static/instances/Homepage/6.png);"
+                    <div class="box box-6" id="mouse-box" style="background-image: url(static/instances/Homepage/6.png);"
                         data-text="MOUSE">
                     </div>
                 </div>
@@ -270,6 +263,26 @@
         </div>
     </div>
 
+    <script>
+        document.getElementById("gpu-box").addEventListener("click", function() {
+        window.location.href = "http://127.0.0.1:8000/catalogue/product=gpu";
+    });
+        document.getElementById("cpu-box").addEventListener('click', function() {
+            window.location.href = "http://127.0.0.1:8000/catalogue/product=cpu";
+    });
+        document.getElementById("motherboard-box").addEventListener("click", function() {
+        window.location.href = "http://127.0.0.1:8000/catalogue/product=motherboard";
+    });
+        document.getElementById("ram-box").addEventListener('click', function() {
+            window.location.href = "http://127.0.0.1:8000/catalogue/product=ram";
+    });
+        document.getElementById("mouse-box").addEventListener("click", function() {
+        window.location.href = "http://127.0.0.1:8000/catalogue/product=mouse";
+    });
+        document.getElementById("keyboard-box").addEventListener('click', function() {
+            window.location.href = "http://127.0.0.1:8000/catalogue/product=keyboard";
+    });
+    </script>
 
     <div style="width: 100%;background-color: white;height: 4px;margin-top: 0%;left: 0%;"></div>
 
